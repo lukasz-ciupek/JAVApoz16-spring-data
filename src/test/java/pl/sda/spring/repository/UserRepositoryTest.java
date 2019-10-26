@@ -43,6 +43,15 @@ public class UserRepositoryTest {
     }
 
     @Test
+    public void shouldFindUserByUsernameAndPassword() {
+        //when
+        Optional<User> actual = userRepository.searchByUsernameAndPassword("user","user");
+
+        //then
+        assertThat(actual.get()).isEqualTo(user);
+    }
+
+    @Test
     public void shouldFindUsersWithFirstNameEqualToJohn() {
         //when
         List<User> actual = userRepository.findByFirstName("John");
@@ -63,7 +72,7 @@ public class UserRepositoryTest {
     @Test
     public void shouldFindOnlyJohnyBeer() {
         //when
-        List<User> actual = userRepository.searchByLastName("Beer");
+        List<User> actual = userRepository.findByLastName("Beer");
 
         //then
         assertThat(actual).containsExactlyInAnyOrder(user2);
@@ -72,7 +81,7 @@ public class UserRepositoryTest {
     @Test
     public void shouldFindAllUsersBySearchByAddress() {
         //when
-        List<User> actual = userRepository.searchByAddress("adres");
+        List<User> actual = userRepository.findByAddress("adres");
 
         //then
         assertThat(actual).containsExactlyInAnyOrder(user, user2, admin);
